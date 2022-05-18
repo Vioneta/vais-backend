@@ -5,7 +5,7 @@ help: ## Shows help message.
 	@awk 'BEGIN {FS = ":.*##";} /^[a-zA-Z_-]+:.*?##/ { printf " \033[36m make %-25s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST);
 	@echo
 
-init: requirements vioneta-install## Install requirements
+init: requirements vioneta-agro-install## Install requirements
 	pre-commit install-hooks --config .github/pre-commit-config.yaml;
 
 requirements:
@@ -44,19 +44,19 @@ update-base-repositories: ## Update stored base repositories
 	@python3 manage/update_default_repositories.py;
 
 clear-storage:
-	rm -rf config/.storage/hacs
-	rm config/.storage/hacs*
+	rm -rf config/.storage/vais
+	rm config/.storage/vais*
 
-vioneta-install: ## Install the latest dev version of Home Assistant
+vioneta-agro-install: ## Install the latest dev version of Home Assistant
 	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
 	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
 	python3 -m pip --disable-pip-version-check \
 		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@dev;
 
-vioneta-install-old: ## Install the oldest version of Home Assistant
+vioneta-agro-install-old: ## Install the oldest version of Home Assistant
 	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
 	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
 	python3 -m pip --disable-pip-version-check \
 		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@2022.5.0;
 
-vioneta-update: vioneta-install ## Alias for 'homeassistant-install'
+vioneta-agro-update: vioneta-install ## Alias for 'vioneta-agro-install'

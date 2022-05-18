@@ -1,8 +1,8 @@
 {
-  "name": "VAI",
+  "name": "VAIS",
   "zip_release": true,
   "hide_default_branch": true,
-  "homeassistant": "2022.5.0",
-  "hacs": "0.0.1",
-  "filename": "vai.zip"
+  "vioneta-agro": "2022.5.0",
+  "vais": "0.0.1",
+  "filename": "vais.zip"
 }
