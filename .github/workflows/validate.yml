@@ -15,43 +15,43 @@ jobs:
     runs-on: ubuntu-latest
     name: With hassfest
     steps:
-    - name: 📥 Checkout the repository
-      uses: actions/checkout@v3.0.2
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v3.0.2
 
-    - name: 🏃 Hassfest validation
-      uses: "home-assistant/actions/hassfest@master"
+      - name: 🏃 Hassfest validation
+        uses: "Vioneta/actions/hassfest@master"
 
-    - name: 📨 Discord notification
-      if: ${{ github.event_name == 'schedule' && failure() }}
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ACTION_FAILURE }}
-      uses: Ilshidur/action-discord@0.3.2
-      with:
-        args: "[Scheduled action failed!](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})"
+    # - name: 📨 Discord notification
+    #   if: ${{ github.event_name == 'schedule' && failure() }}
+    #   env:
+    #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ACTION_FAILURE }}
+    #   uses: Ilshidur/action-discord@0.3.2
+    #   with:
+    #     args: "[Scheduled action failed!](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})"
 
-  validate-hacs:
+  validate-vais:
     runs-on: ubuntu-latest
-    name: With HACS Action
+    name: With VAIS Action
     steps:
-    - name: 📥 Checkout the repository
-      uses: actions/checkout@v3.0.2
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v3.0.2
 
-    - name: 🏃 HACS validation
-      uses: hacs/action@main
-      with:
-        category: integration
-        comment: false
+      - name: 🏃 VAIS validation
+        uses: Vioneta/action@main
+        with:
+          category: integration
+          comment: false
 
-    - name: 📨 Discord notification
-      if: ${{ github.event_name == 'schedule' && failure() }}
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ACTION_FAILURE }}
-      uses: Ilshidur/action-discord@0.3.2
-      with:
-        args: "[Scheduled action failed!](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})"
+    # - name: 📨 Discord notification
+    #   if: ${{ github.event_name == 'schedule' && failure() }}
+    #   env:
+    #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ACTION_FAILURE }}
+    #   uses: Ilshidur/action-discord@0.3.2
+    #   with:
+    #     args: "[Scheduled action failed!](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})"
 
-  validate-homeassistant:
-    name: With Home Assistant
+  validate-vioneta-agro:
+    name: With Vioneta Agro
     strategy:
       matrix:
         channel: [stable, beta, dev, "2022.4.0"]
@@ -60,7 +60,7 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v3.0.2
 
-      - name: 📋 Copy sample configuration for Home Assistant
+      - name: 📋 Copy sample configuration for Vioneta Agro
         run: |
           mkdir ./test_configuration
           bash manage/install_frontend
@@ -69,17 +69,17 @@ jobs:
           echo "hacs:" >> ./test_configuration/configuration.yaml
           echo "  token: CHANGE_ME" >> ./test_configuration/configuration.yaml
 
-      - name: 🛠️ Setup Home Assistant
-        id: homeassistant
+      - name: 🛠️ Setup Vioneta Agro
+        id: vioneta-agro
         uses: ludeeus/setup-homeassistant@main
         with:
           tag: ${{ matrix.channel }}
           config-dir: test_configuration
 
-      - name: 📨 Discord notification
-        if: ${{ github.event_name == 'schedule' && failure() }}
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ACTION_FAILURE }}
-        uses: Ilshidur/action-discord@0.3.2
-        with:
-          args: "[Scheduled action failed!](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})"
+      # - name: 📨 Discord notification
+      #   if: ${{ github.event_name == 'schedule' && failure() }}
+      #   env:
+      #     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ACTION_FAILURE }}
+      #   uses: Ilshidur/action-discord@0.3.2
+      #   with:
+      #     args: "[Scheduled action failed!](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})"

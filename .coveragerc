@@ -4,14 +4,14 @@ source = custom_components
 omit =
     # omit pieces of code that rely on external API calls
     # These should be mocked one day....
-    custom_components/hacs/helpers/get_defaults.py
-    custom_components/hacs/operational/setup_actions/load_hacs_repository.py
-    custom_components/hacs/operational/factory.py
-    custom_components/hacs/operational/relaod.py
-    custom_components/hacs/operational/remove.py
-    custom_components/hacs/operational/setup.py
-    custom_components/hacs/config_flow.py
-    custom_components/hacs/__init__.py
+    custom_components/vais/helpers/get_defaults.py
+    custom_components/vais/operational/setup_actions/load_vais_repository.py
+    custom_components/vais/operational/factory.py
+    custom_components/vais/operational/relaod.py
+    custom_components/vais/operational/remove.py
+    custom_components/vais/operational/setup.py
+    custom_components/vais/config_flow.py
+    custom_components/vais/__init__.py
 
     # omit tests
     tests/*

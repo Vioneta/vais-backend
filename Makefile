@@ -35,7 +35,7 @@ coverage: ## Display coverage report
 	@coverage report --skip-covered
 
 update: ## Pull main from hacs/integration
-	git pull upstream main;
+	git pull ;
 
 bump-frontend: ## Bump the HACS frontend
 	@bash manage/bump_frontend;

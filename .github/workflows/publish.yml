@@ -10,7 +10,7 @@ on:
 
 jobs:
   release_zip_file:
-    name: Publish HACS zip file asset
+    name: Publish VAIS zip file asset
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,37 +22,36 @@ jobs:
         uses: actions/setup-python@v3.1.2
         with:
           python-version: "3.x"
-          cache: 'pip'
+          cache: "pip"
 
       - name: 🔢 Get version
         id: version
-        uses: home-assistant/actions/helpers/version@master
+        uses: Vioneta/actions/helpers/version@master
 
       - name: 🔢 Set version number
         run: |
-          sed -i "/MINIMUM_HA_VERSION = /c\MINIMUM_HA_VERSION = \"$(jq .homeassistant -r ${{ github.workspace }}/hacs.json)\"" ${{ github.workspace }}/custom_components/hacs/const.py
+          sed -i "/MINIMUM_HA_VERSION = /c\MINIMUM_HA_VERSION = \"$(jq .vioneta-agro -r ${{ github.workspace }}/hacs.json)\"" ${{ github.workspace }}/custom_components/vais/const.py
           python3 ${{ github.workspace }}/manage/update_manifest.py --version ${{ steps.version.outputs.version }}
 
-      - name: ⏬ Download HACS frontend
+      - name: ⏬ Download VAIS frontend
         run: ${{ github.workspace }}/manage/install_frontend
 
       - name: 📤 Upload zip to action
         uses: actions/upload-artifact@v3.0.0
         if: ${{ github.event_name == 'push' }}
         with:
-          name: hacs
-          path: ${{ github.workspace }}/custom_components/hacs
+          name: vais
+          path: ${{ github.workspace }}/custom_components/vais
 
-      # Pack the HACS dir as a zip and upload to the release
-      - name: 📦 ZIP HACS Dir
+      # Pack the VAIS dir as a zip and upload to the release
+      - name: 📦 ZIP VAIS Dir
         if: ${{ github.event_name == 'release' }}
         run: |
-          cd ${{ github.workspace }}/custom_components/hacs
-          zip hacs.zip -r ./
+          cd ${{ github.workspace }}/custom_components/vais
+          zip vais.zip -r ./
 
       - name: 📤 Upload zip to release
         uses: softprops/action-gh-release@v0.1.14
         if: ${{ github.event_name == 'release' }}
         with:
-          files: ${{ github.workspace }}/custom_components/hacs/hacs.zip
-
+          files: ${{ github.workspace }}/custom_components/vais/vais.zip

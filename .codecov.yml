@@ -15,11 +15,11 @@ coverage:
       validate:
         target: 100%
         paths:
-          - custom_components/hacs/validate/
+          - custom_components/vais/validate/
       repositories:
         target: 50%
         paths:
-          - custom_components/hacs/repositories/
+          - custom_components/vais/repositories/
 
 parsers:
   gcov:
