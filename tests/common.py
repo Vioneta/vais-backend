@@ -17,12 +17,12 @@ from homeassistant.helpers.entity_registry import EntityRegistry
 import homeassistant.util.dt as date_util
 from homeassistant.util.unit_system import METRIC_SYSTEM
 
-from custom_components.hacs.repositories.base import HacsRepository
-from custom_components.hacs.utils.logger import get_hacs_logger
+from custom_components.vais.repositories.base import VaisRepository
+from custom_components.vais.utils.logger import get_vais_logger
 
 from tests.async_mock import AsyncMock, Mock, patch
 
-_LOGGER = get_hacs_logger()
+_LOGGER = get_vais_logger()
 TOKEN = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 INSTANCES = []
 
@@ -42,18 +42,19 @@ def fixture(filename, asjson=True):
                 return json.loads(fptr.read())
             return fptr.read()
     except OSError as err:
-        raise OSError(f"Missing fixture for {path.split('fixtures/')[1]}") from err
+        raise OSError(
+            f"Missing fixture for {path.split('fixtures/')[1]}") from err
 
 
-def dummy_repository_base(hacs, repository=None):
+def dummy_repository_base(vais, repository=None):
     if repository is None:
-        repository = HacsRepository(hacs)
+        repository = VaisRepository(vais)
         repository.data.full_name = "test/test"
         repository.data.full_name_lower = "test/test"
-    repository.hacs = hacs
-    repository.hacs.hass = hacs.hass
-    repository.hacs.core.config_path = hacs.hass.config.path()
-    repository.logger = get_hacs_logger()
+    repository.vais = vais
+    repository.vais.hass = vais.hass
+    repository.vais.core.config_path = vais.hass.config.path()
+    repository.logger = get_vais_logger()
     repository.data.domain = "test"
     repository.data.last_version = "3"
     repository.data.selected_tag = "3"
@@ -225,7 +226,8 @@ def mock_storage(data=None):
         """Mock version of write data."""
         _LOGGER.info("Writing data to %s: %s", store.key, data_to_write)
         # To ensure that the data can be serialized
-        data[store.key] = json.loads(json.dumps(data_to_write, cls=store._encoder))
+        data[store.key] = json.loads(
+            json.dumps(data_to_write, cls=store._encoder))
 
     async def mock_remove(store):
         """Remove data."""

@@ -1,13 +1,13 @@
-"""HacsConfiguration Test Suite."""
+"""VaisConfiguration Test Suite."""
 # pylint: disable=missing-docstring
 import pytest
 
-from custom_components.hacs.base import HacsConfiguration
-from custom_components.hacs.exceptions import HacsException
+from custom_components.vais.base import VaisConfiguration
+from custom_components.vais.exceptions import VaisException
 
 
 def test_configuration_and_option():
-    config = HacsConfiguration()
+    config = VaisConfiguration()
     config.update_from_dict({"token": "xxxxxxxxxx"})
 
     assert isinstance(config.to_json(), dict)
@@ -16,10 +16,10 @@ def test_configuration_and_option():
     assert config.token == "xxxxxxxxxx"
 
     assert isinstance(config.sidepanel_title, str)
-    assert config.sidepanel_title == "HACS"
+    assert config.sidepanel_title == "VAIS"
 
     assert isinstance(config.sidepanel_icon, str)
-    assert config.sidepanel_icon == "hacs:hacs"
+    assert config.sidepanel_icon == "vais:vais"
 
     assert isinstance(config.appdaemon, bool)
     assert not config.appdaemon
@@ -44,6 +44,6 @@ def test_configuration_and_option():
 
 
 def test_edge_update_with_none():
-    config = HacsConfiguration()
-    with pytest.raises(HacsException):
+    config = VaisConfiguration()
+    with pytest.raises(VaisException):
         assert config.update_from_dict(None)

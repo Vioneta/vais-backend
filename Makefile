@@ -1,11 +1,11 @@
 .DEFAULT_GOAL := help
 
 help: ## Shows help message.
-	@printf "\033[1m%s\033[36m %s\033[32m %s\033[0m \n\n" "Development environment for" "HACS" "Integration";
+	@printf "\033[1m%s\033[36m %s\033[32m %s\033[0m \n\n" "Development environment for" "VAI" "Integration";
 	@awk 'BEGIN {FS = ":.*##";} /^[a-zA-Z_-]+:.*?##/ { printf " \033[36m make %-25s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST);
 	@echo
 
-init: requirements homeassistant-install## Install requirements
+init: requirements vioneta-install## Install requirements
 	pre-commit install-hooks --config .github/pre-commit-config.yaml;
 
 requirements:
@@ -47,16 +47,16 @@ clear-storage:
 	rm -rf config/.storage/hacs
 	rm config/.storage/hacs*
 
-homeassistant-install: ## Install the latest dev version of Home Assistant
+vioneta-install: ## Install the latest dev version of Home Assistant
 	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
 	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
 	python3 -m pip --disable-pip-version-check \
-		install --upgrade git+https://github.com/home-assistant/home-assistant.git@dev;
+		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@dev;
 
-homeassistant-install-old: ## Install the oldest version of Home Assistant
+vioneta-install-old: ## Install the oldest version of Home Assistant
 	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
 	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
 	python3 -m pip --disable-pip-version-check \
-		install --upgrade git+https://github.com/home-assistant/home-assistant.git@2022.4.0;
+		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@2022.5.0;
 
-homeassistant-update: homeassistant-install ## Alias for 'homeassistant-install'
+vioneta-update: vioneta-install ## Alias for 'homeassistant-install'

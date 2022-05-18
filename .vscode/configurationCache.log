@@ -1,0 +1,1 @@
+{"buildTargets":["bump-frontend","clear-storage","coverage","help","init","lint","make","requirements","start","test","update","update-base-repositories","vioneta-install","vioneta-install-old","vioneta-update"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

@@ -1,4 +1,4 @@
-from custom_components.hacs.base import RemovedRepository
+from custom_components.vais.base import RemovedRepository
 
 
 def test_removed():

@@ -1,13 +1,13 @@
-"""HACS Manifest Test Suite."""
+"""VAIS Manifest Test Suite."""
 # pylint: disable=missing-docstring
 import pytest
 
-from custom_components.hacs.exceptions import HacsException
-from custom_components.hacs.repositories.base import HacsManifest
+from custom_components.vais.exceptions import VaisException
+from custom_components.vais.repositories.base import VaisManifest
 
 
 def test_manifest_structure():
-    manifest = HacsManifest.from_dict({"name": "TEST"})
+    manifest = VaisManifest.from_dict({"name": "TEST"})
 
     assert isinstance(manifest.manifest, dict)
 
@@ -32,13 +32,13 @@ def test_manifest_structure():
     assert isinstance(manifest.persistent_directory, (str, type(None)))
     assert manifest.persistent_directory is None
 
-    assert isinstance(manifest.hacs, (str, type(None)))
-    assert not manifest.hacs
+    assert isinstance(manifest.vais, (str, type(None)))
+    assert not manifest.vais
 
     assert isinstance(manifest.hide_default_branch, bool)
     assert not manifest.hide_default_branch
 
 
 def test_edge_pass_none():
-    with pytest.raises(HacsException):
-        assert HacsManifest.from_dict(None)
+    with pytest.raises(VaisException):
+        assert VaisManifest.from_dict(None)

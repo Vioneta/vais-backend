@@ -8,11 +8,11 @@ from aiogithubapi import GitHub, GitHubAPI
 import aiohttp
 from homeassistant.core import HomeAssistant
 
-from custom_components.hacs.base import HacsBase
-from custom_components.hacs.const import HACS_ACTION_GITHUB_API_HEADERS
-from custom_components.hacs.exceptions import HacsException
-from custom_components.hacs.utils.logger import get_hacs_logger
-from custom_components.hacs.validate.manager import ValidationManager
+from custom_components.vais.base import HacsBase
+from custom_components.vais.const import HACS_ACTION_GITHUB_API_HEADERS
+from custom_components.vais.exceptions import HacsException
+from custom_components.vais.utils.logger import get_hacs_logger
+from custom_components.vais.validate.manager import ValidationManager
 
 TOKEN = os.getenv("INPUT_GITHUB_TOKEN")
 GITHUB_WORKSPACE = os.getenv("GITHUB_WORKSPACE")
@@ -129,14 +129,14 @@ async def validate_repository(repository, category, ref=None):
         hacs.configuration.token = TOKEN
         hacs.core.config_path = None
         hacs.validation = ValidationManager(hacs=hacs, hass=hacs.hass)
-        ## Legacy GitHub client
+        # Legacy GitHub client
         hacs.github = GitHub(
             hacs.configuration.token,
             session,
             headers=HACS_ACTION_GITHUB_API_HEADERS,
         )
 
-        ## New GitHub client
+        # New GitHub client
         hacs.githubapi = GitHubAPI(
             token=hacs.configuration.token,
             session=session,

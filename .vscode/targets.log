@@ -1,0 +1,431 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Wed May 18 15:22:32 2022
+
+# Variables
+
+# environment
+OPS_DIR = /home/charith/.ops
+# environment
+GDK_BACKEND = x11
+# environment
+LC_ALL = C
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+SSH_AGENT_LAUNCHER = gnome-keyring
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1a4a8cb5-c01e-4be6-812f-c3aeded46aeb.sock
+# environment
+MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
+# environment
+LC_NAME = si_LK
+# environment
+LC_NUMERIC = si_LK
+# environment
+VSCODE_CWD = /home/charith
+# environment
+WINDOWPATH = 2
+# environment
+NVM_DIR = /home/charith/.nvm
+# environment
+LC_ADDRESS = si_LK
+# environment
+LIBVIRT_DEFAULT_URI = qemu:///system
+# default
+MAKE_COMMAND := make
+# environment
+GTK3_MODULES = gtk-vector-screenshot:xapp-gtk3-module
+# environment
+QT_ACCESSIBILITY = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/charith/development/intergration-store/integrations-store-backend
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/share/gnome:/home/charith/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+NVM_INC = /home/charith/.nvm/versions/node/v12.22.3/include/node
+# environment
+VSCODE_CODE_CACHE_PATH = /home/charith/.config/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
+# environment
+KIGITHUB = https://github.com/KiCad
+# environment
+LANG = C
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# environment
+KICAD_PATH = /usr/share/kicad
+# makefile
+CURDIR := /home/charith/development/intergration-store/integrations-store-backend
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# default
+.SHELLFLAGS := -c
+# environment
+NVM_BIN = /home/charith/.nvm/versions/node/v12.22.3/bin
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_PID = 5260
+# environment
+XDG_SESSION_TYPE = x11
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+_WSREP_START_POSITION = 
+# environment
+SESSION_MANAGER = local/Tiron:@/tmp/.ICE-unix/4504,unix/Tiron:/tmp/.ICE-unix/4504
+# automatic
+*F = $(notdir $*)
+# environment
+QT_QPA_PLATFORMTHEME = qt5ct
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+PLATFORMIO_CALLER = vscode
+# environment
+XMODIFIERS = @im=ibus
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# environment
+SHLVL = 0
+# environment
+NODE_RED_HOME = /home/charith/.vscode/extensions/formulahendry.vscode-node-red-0.2.0/node_modules/node-red
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/charith/.local/bin:/home/charith/bin:/home/charith/.ops/bin:/home/charith/.cargo/bin:/home/charith/.local/bin:/home/charith/bin:/home/charith/.ops/bin:/home/charith/.nvm/versions/node/v12.22.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/charith/.dotnet/tools:/usr/local/go/bin:/usr/local/go/bin:~/flutter-sdk/flutter/bin:~/Android/Sdk/tools/bin:/usr/local/go/bin:/home/charith/.dotnet/tools:/usr/local/go/bin:/usr/local/go/bin:~/flutter-sdk/flutter/bin:~/Android/Sdk/tools/bin
+# default
+MAKEFILES := 
+# environment
+LC_MONETARY = si_LK
+# automatic
+^F = $(notdir $^)
+# environment
+LC_TIME = si_LK
+# environment
+INVOCATION_ID = 449acf23c27b4e1090355077b0f26e45
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+USERNAME = charith
+# environment
+LC_TELEPHONE = si_LK
+# automatic
+?F = $(notdir $?)
+# environment
+NO_PROXY = 127.0.0.1
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# automatic
++F = $(notdir $+)
+# environment
+DESKTOP_SESSION = ubuntu
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+LOGNAME = charith
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# environment
+PLATFORMIO_PATH = /home/charith/.platformio/python3/bin:/home/charith/.local/bin:/home/charith/bin:/home/charith/.ops/bin:/home/charith/.cargo/bin:/home/charith/.local/bin:/home/charith/bin:/home/charith/.ops/bin:/home/charith/.nvm/versions/node/v12.22.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/charith/.dotnet/tools:/usr/local/go/bin:/usr/local/go/bin:~/flutter-sdk/flutter/bin:~/Android/Sdk/tools/bin:/usr/local/go/bin:/home/charith/.dotnet/tools:/usr/local/go/bin:/usr/local/go/bin:~/flutter-sdk/flutter/bin:~/Android/Sdk/tools/bin
+# makefile (from 'Makefile', line 1)
+.DEFAULT_GOAL := help
+# environment
+SYSTEMD_EXEC_PID = 4531
+# environment
+DISPLAY = :1
+# environment
+USER = charith
+# environment
+GTK_MODULES = gail:atk-bridge
+# environment
+DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
+# default
+MAKE_VERSION := 4.3
+# environment
+MANAGERPID = 3876
+# environment
+LC_MEASUREMENT = si_LK
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 5260
+# environment
+_ = /usr/share/code/code
+# environment
+LC_PAPER = si_LK
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+NVM_CD_FLAGS = 
+# environment
+JOURNAL_STREAM = 8:56452
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+PLATFORMIO_IDE = 2.4.3
+# environment
+HOME = /home/charith
+# environment
+QT_IM_MODULE = ibus
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-0e15214c-1.67.0-main.sock
+# environment
+IM_CONFIG_PHASE = 1
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+GDMSESSION = ubuntu
+# environment
+LC_IDENTIFICATION = si_LK
+# variable set hash-table stats:
+# Load=122/1024=12%, Rehash=0, Collisions=5/152=3%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 64768, inode 3902081): 25 files, no impossibilities.
+
+# 25 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+vioneta-install:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 51):
+	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
+	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
+	python3 -m pip --disable-pip-version-check \
+		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@dev;
+
+coverage:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 34):
+	@python3 -m pytest tests -rxf -x -v -l --cov=./ --cov-report=xml > /dev/null
+	@coverage report --skip-covered
+
+start:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 19):
+	@bash manage/integration_start;
+
+update:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 38):
+ 
+make: *** No rule to make target 'all'.  Stop.
+
+	git pull upstream main;
+
+lint:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 25):
+	set -e
+	isort .
+	jq -r -e -c . tests/fixtures/*.json
+	pre-commit install-hooks --config .github/pre-commit-config.yaml;
+	pre-commit run --hook-stage manual --all-files --config .github/pre-commit-config.yaml;
+	bellybutton lint
+	vulture . --min-confidence 75 --ignore-names policy
+
+vioneta-install-old:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 57):
+	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
+	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
+	python3 -m pip --disable-pip-version-check \
+		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@2022.5.0;
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-18 13:10:02.286849529
+#  File has been updated.
+#  Successfully updated.
+
+requirements:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 12):
+	sudo apt update && sudo apt install -y libxml2-dev libxslt-dev bash curl jq libpcap0.8
+	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3"
+	python3 -m pip --disable-pip-version-check install -U setuptools wheel
+	python3 -m pip --disable-pip-version-check install --ignore-installed -r requirements.txt
+	@bash manage/install_frontend
+
+vioneta-update: vioneta-install
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clear-storage:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 47):
+	rm -rf config/.storage/hacs
+	rm config/.storage/hacs*
+
+update-base-repositories:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 44):
+	@python3 manage/update_default_repositories.py;
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+init: requirements vioneta-install
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 9):
+	pre-commit install-hooks --config .github/pre-commit-config.yaml;
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+help:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 4):
+	@printf "\033[1m%s\033[36m %s\033[32m %s\033[0m \n\n" "Development environment for" "VAI" "Integration";
+	@awk 'BEGIN {FS = ":.*##";} /^[a-zA-Z_-]+:.*?##/ { printf " \033[36m make %-25s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST);
+	@echo
+
+test:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 22):
+	@python3 -m pytest tests -rxf -x -v -l --cov=./ --cov-report=xml
+
+bump-frontend:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 41):
+	@bash manage/bump_frontend;
+
+# files hash-table stats:
+# Load=18/1024=2%, Rehash=0, Collisions=0/33=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 44 / storage = 476 B / avg = 10 B
+# current buf: size = 8162 B / used = 476 B / count = 44 / avg = 10 B
+
+# strcache performance: lookups = 65 / hit rate = 32%
+# hash-table stats:
+# Load=44/8192=1%, Rehash=0, Collisions=0/65=0%
+# Finished Make data base on Wed May 18 15:22:32 2022
+
+ 

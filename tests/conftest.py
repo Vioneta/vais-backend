@@ -18,25 +18,25 @@ from homeassistant.loader import Integration
 from homeassistant.runner import HassEventLoopPolicy
 import pytest
 
-from custom_components.hacs.base import (
-    HacsBase,
-    HacsCommon,
-    HacsCore,
-    HacsRepositories,
-    HacsSystem,
+from custom_components.vais.base import (
+    VaisBase,
+    VaisCommon,
+    VaisCore,
+    VaisRepositories,
+    VaisSystem,
 )
-from custom_components.hacs.const import DOMAIN
-from custom_components.hacs.repositories import (
-    HacsAppdaemonRepository,
-    HacsIntegrationRepository,
-    HacsNetdaemonRepository,
-    HacsPluginRepository,
-    HacsPythonScriptRepository,
-    HacsThemeRepository,
+from custom_components.vais.const import DOMAIN
+from custom_components.vais.repositories import (
+    VaisAppdaemonRepository,
+    VaisIntegrationRepository,
+    VaisNetdaemonRepository,
+    VaisPluginRepository,
+    VaisPythonScriptRepository,
+    VaisThemeRepository,
 )
-from custom_components.hacs.utils.configuration_schema import TOKEN as CONF_TOKEN
-from custom_components.hacs.utils.queue_manager import QueueManager
-from custom_components.hacs.validate.manager import ValidationManager
+from custom_components.vais.utils.configuration_schema import TOKEN as CONF_TOKEN
+from custom_components.vais.utils.queue_manager import QueueManager
+from custom_components.vais.validate.manager import ValidationManager
 
 from tests.async_mock import MagicMock
 from tests.common import (
@@ -90,7 +90,8 @@ def hass(event_loop, tmpdir):
         orig_exception_handler(loop, context)
 
     exceptions = []
-    hass_obj = event_loop.run_until_complete(async_test_home_assistant(event_loop, tmpdir))
+    hass_obj = event_loop.run_until_complete(
+        async_test_home_assistant(event_loop, tmpdir))
     orig_exception_handler = event_loop.get_exception_handler()
     event_loop.set_exception_handler(exc_handle)
 
@@ -104,101 +105,102 @@ def hass(event_loop, tmpdir):
 
 
 @pytest.fixture
-async def hacs(hass: HomeAssistant):
-    """Fixture to provide a HACS object."""
-    hacs_obj = HacsBase()
-    hacs_obj.hass = hass
-    hacs_obj.validation = ValidationManager(hacs=hacs_obj, hass=hass)
-    hacs_obj.session = async_get_clientsession(hass)
-    hacs_obj.repositories = HacsRepositories()
+async def vais(hass: HomeAssistant):
+    """Fixture to provide a VAIS object."""
+    vais_obj = VaisBase()
+    vais_obj.hass = hass
+    vais_obj.validation = ValidationManager(vais=vais_obj, hass=hass)
+    vais_obj.session = async_get_clientsession(hass)
+    vais_obj.repositories = VaisRepositories()
 
-    hacs_obj.integration = Integration(
+    vais_obj.integration = Integration(
         hass=hass,
-        pkg_path="custom_components.hacs",
-        file_path=Path(hass.config.path("custom_components/hacs")),
-        manifest={"domain": DOMAIN, "version": "0.0.0", "requirements": ["hacs_frontend==1"]},
+        pkg_path="custom_components.vais",
+        file_path=Path(hass.config.path("custom_components/vais")),
+        manifest={"domain": DOMAIN, "version": "0.0.0",
+                  "requirements": ["vais_frontend==1"]},
     )
-    hacs_obj.common = HacsCommon()
-    hacs_obj.data = AsyncMock()
-    hacs_obj.queue = QueueManager(hass=hass)
-    hacs_obj.core = HacsCore()
-    hacs_obj.system = HacsSystem()
+    vais_obj.common = VaisCommon()
+    vais_obj.data = AsyncMock()
+    vais_obj.queue = QueueManager(hass=hass)
+    vais_obj.core = VaisCore()
+    vais_obj.system = VaisSystem()
 
-    hacs_obj.core.config_path = hass.config.path()
-    hacs_obj.core.ha_version = AwesomeVersion(HAVERSION)
-    hacs_obj.version = hacs_obj.integration.version
-    hacs_obj.configuration.token = TOKEN
+    vais_obj.core.config_path = hass.config.path()
+    vais_obj.core.ha_version = AwesomeVersion(HAVERSION)
+    vais_obj.version = vais_obj.integration.version
+    vais_obj.configuration.token = TOKEN
 
-    ## Old GitHub client
-    hacs_obj.github = GitHub(
-        token=hacs_obj.configuration.token,
-        session=hacs_obj.session,
+    # Old GitHub client
+    vais_obj.github = GitHub(
+        token=vais_obj.configuration.token,
+        session=vais_obj.session,
         headers={
-            "User-Agent": "HACS/pytest",
+            "User-Agent": "VAIS/pytest",
             "Accept": ACCEPT_HEADERS["preview"],
         },
     )
 
-    ## New GitHub client
-    hacs_obj.githubapi = GitHubAPI(
-        token=hacs_obj.configuration.token,
-        session=hacs_obj.session,
-        **{"client_name": "HACS/pytest"},
+    # New GitHub client
+    vais_obj.githubapi = GitHubAPI(
+        token=vais_obj.configuration.token,
+        session=vais_obj.session,
+        **{"client_name": "VAIS/pytest"},
     )
 
-    hacs_obj.queue.clear()
+    vais_obj.queue.clear()
 
-    hass.data[DOMAIN] = hacs_obj
+    hass.data[DOMAIN] = vais_obj
 
-    yield hacs_obj
-
-
-@pytest.fixture
-def repository(hacs):
-    """Fixtrue for HACS repository object"""
-    yield dummy_repository_base(hacs)
+    yield vais_obj
 
 
 @pytest.fixture
-def repository_integration(hacs):
-    """Fixtrue for HACS integration repository object"""
-    repository_obj = HacsIntegrationRepository(hacs, "test/test")
-    yield dummy_repository_base(hacs, repository_obj)
+def repository(vais):
+    """Fixtrue for VAIS repository object"""
+    yield dummy_repository_base(vais)
 
 
 @pytest.fixture
-def repository_theme(hacs):
-    """Fixtrue for HACS theme repository object"""
-    repository_obj = HacsThemeRepository(hacs, "test/test")
-    yield dummy_repository_base(hacs, repository_obj)
+def repository_integration(vais):
+    """Fixtrue for VAIS integration repository object"""
+    repository_obj = VaisIntegrationRepository(vais, "test/test")
+    yield dummy_repository_base(vais, repository_obj)
 
 
 @pytest.fixture
-def repository_plugin(hacs):
-    """Fixtrue for HACS plugin repository object"""
-    repository_obj = HacsPluginRepository(hacs, "test/test")
-    yield dummy_repository_base(hacs, repository_obj)
+def repository_theme(vais):
+    """Fixtrue for VAIS theme repository object"""
+    repository_obj = VaisThemeRepository(vais, "test/test")
+    yield dummy_repository_base(vais, repository_obj)
 
 
 @pytest.fixture
-def repository_python_script(hacs):
-    """Fixtrue for HACS python_script repository object"""
-    repository_obj = HacsPythonScriptRepository(hacs, "test/test")
-    yield dummy_repository_base(hacs, repository_obj)
+def repository_plugin(vais):
+    """Fixtrue for VAIS plugin repository object"""
+    repository_obj = VaisPluginRepository(vais, "test/test")
+    yield dummy_repository_base(vais, repository_obj)
 
 
 @pytest.fixture
-def repository_appdaemon(hacs):
-    """Fixtrue for HACS appdaemon repository object"""
-    repository_obj = HacsAppdaemonRepository(hacs, "test/test")
-    yield dummy_repository_base(hacs, repository_obj)
+def repository_python_script(vais):
+    """Fixtrue for VAIS python_script repository object"""
+    repository_obj = VaisPythonScriptRepository(vais, "test/test")
+    yield dummy_repository_base(vais, repository_obj)
 
 
 @pytest.fixture
-def repository_netdaemon(hacs):
-    """Fixtrue for HACS netdaemon repository object"""
-    repository_obj = HacsNetdaemonRepository(hacs, "test/test")
-    yield dummy_repository_base(hacs, repository_obj)
+def repository_appdaemon(vais):
+    """Fixtrue for VAIS appdaemon repository object"""
+    repository_obj = VaisAppdaemonRepository(vais, "test/test")
+    yield dummy_repository_base(vais, repository_obj)
+
+
+@pytest.fixture
+def repository_netdaemon(vais):
+    """Fixtrue for VAIS netdaemon repository object"""
+    repository_obj = VaisNetdaemonRepository(vais, "test/test")
+    yield dummy_repository_base(vais, repository_obj)
 
 
 @pytest.fixture

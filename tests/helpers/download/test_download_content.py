@@ -26,11 +26,12 @@ async def test_download_content(repository, aresponses, tmp_path):
     ]
 
     await repository.download_content()
-    assert os.path.exists(f"{repository.content.path.local}/test/path/file.file")
+    assert os.path.exists(
+        f"{repository.content.path.local}/test/path/file.file")
 
 
 @pytest.mark.asyncio
-async def test_download_content_integration(repository_integration, aresponses, hacs):
+async def test_download_content_integration(repository_integration, aresponses, vais):
     aresponses.add(
         "raw.githubusercontent.com",
         aresponses.ANY,
@@ -74,4 +75,4 @@ async def test_download_content_integration(repository_integration, aresponses, 
         )
     await repository_integration.download_content()
     for path in repository_integration.tree:
-        assert os.path.exists(f"{hacs.core.config_path}/{path.full_path}")
+        assert os.path.exists(f"{vais.core.config_path}/{path.full_path}")

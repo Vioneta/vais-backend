@@ -1,4 +1,4 @@
-from custom_components.hacs.repositories.base import RepositoryData
+from custom_components.vais.repositories.base import RepositoryData
 
 
 def test_guarded():

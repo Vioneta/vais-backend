@@ -5,7 +5,7 @@ import json
 import aiohttp
 import pytest
 
-from custom_components.hacs.exceptions import HacsException
+from custom_components.vais.exceptions import VaisException
 
 from tests.common import TOKEN
 from tests.sample_data import (
@@ -27,7 +27,8 @@ async def test_get_repository(aresponses, repository_integration):
         "api.github.com",
         "/repos/test/test",
         "get",
-        aresponses.Response(body=json.dumps(repository_data), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(repository_data),
+                            headers=response_rate_limit_header),
     )
 
     repository, _ = await repository_integration.async_get_legacy_repository_object()
@@ -40,7 +41,8 @@ async def test_get_repository_exception(aresponses, repository_integration):
         "api.github.com",
         "/rate_limit",
         "get",
-        aresponses.Response(body=b"{}", headers=response_rate_limit_header_with_limit, status=403),
+        aresponses.Response(
+            body=b"{}", headers=response_rate_limit_header_with_limit, status=403),
     )
     aresponses.add(
         "api.github.com",
@@ -52,5 +54,5 @@ async def test_get_repository_exception(aresponses, repository_integration):
             status=403,
         ),
     )
-    with pytest.raises(HacsException):
+    with pytest.raises(VaisException):
         await repository_integration.async_get_legacy_repository_object()

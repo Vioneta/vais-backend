@@ -1,0 +1,18 @@
+{
+  "codeowners": ["@ludeeus"],
+  "config_flow": true,
+  "dependencies": [
+    "http",
+    "websocket_api",
+    "frontend",
+    "persistent_notification",
+    "lovelace"
+  ],
+  "documentation": "https://vais.xyz/docs/configuration/start",
+  "domain": "vais",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/vais/integration/issues",
+  "name": "VAIS",
+  "requirements": ["aiogithubapi>=22.2.4"],
+  "version": "0.0.0"
+}

@@ -3,18 +3,18 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from custom_components.hacs.base import HacsBase
-from custom_components.hacs.exceptions import HacsExecutionStillInProgress
-from custom_components.hacs.utils.queue_manager import QueueManager
+from custom_components.vais.base import VaisBase
+from custom_components.vais.exceptions import VaisExecutionStillInProgress
+from custom_components.vais.utils.queue_manager import QueueManager
 
 dummy_task = AsyncMock()
 
 
 @pytest.mark.asyncio
-async def test_queue_manager(hacs: HacsBase, caplog: pytest.LogCaptureFixture) -> None:
+async def test_queue_manager(vais: VaisBase, caplog: pytest.LogCaptureFixture) -> None:
     """Test the queue manager."""
 
-    queue_manager = QueueManager(hass=hacs.hass)
+    queue_manager = QueueManager(hass=vais.hass)
     assert not queue_manager.running
     assert not queue_manager.has_pending_tasks
     assert queue_manager.pending_tasks == 0
@@ -35,7 +35,7 @@ async def test_queue_manager(hacs: HacsBase, caplog: pytest.LogCaptureFixture) -
 
     queue_manager.running = True
 
-    with pytest.raises(HacsExecutionStillInProgress):
+    with pytest.raises(VaisExecutionStillInProgress):
         await queue_manager.execute()
 
     queue_manager.running = False

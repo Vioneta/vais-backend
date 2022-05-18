@@ -9,11 +9,11 @@ def update():
     storage, to_store, old = None, {}, {}
     updated = 0
 
-    with open(f"{os.getcwd()}/config/.storage/hacs.repositories", encoding="utf-8") as storage_file:
+    with open(f"{os.getcwd()}/config/.storage/vai.repositories", encoding="utf-8") as storage_file:
         storage = json.load(storage_file)
 
     with open(
-        f"{os.getcwd()}/custom_components/hacs/utils/default.repositories", encoding="utf-8"
+        f"{os.getcwd()}/custom_components/vai/utils/default.repositories", encoding="utf-8"
     ) as old_file:
         old = json.load(old_file)
 
@@ -33,7 +33,7 @@ def update():
         to_store[repo] = storage["data"][repo]
 
     with open(
-        f"{os.getcwd()}/custom_components/hacs/utils/default.repositories",
+        f"{os.getcwd()}/custom_components/vai/utils/default.repositories",
         mode="w",
         encoding="utf-8",
     ) as to_store_file:

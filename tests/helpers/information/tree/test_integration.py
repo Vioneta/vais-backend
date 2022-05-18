@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from custom_components.hacs.enums import HacsCategory
+from custom_components.vais.enums import VaisCategory
 
 from tests.sample_data import (
     category_test_treefiles,
@@ -27,7 +27,8 @@ async def test_base(aresponses, repository_integration):
         "api.github.com",
         "/repos/test/test",
         "get",
-        aresponses.Response(body=json.dumps(repository_data), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(repository_data),
+                            headers=response_rate_limit_header),
     )
     aresponses.add(
         "api.github.com",
@@ -40,7 +41,7 @@ async def test_base(aresponses, repository_integration):
         "/repos/test/test/git/trees/main",
         "get",
         aresponses.Response(
-            body=json.dumps(category_test_treefiles(HacsCategory.INTEGRATION)),
+            body=json.dumps(category_test_treefiles(VaisCategory.INTEGRATION)),
             headers=response_rate_limit_header,
         ),
     )

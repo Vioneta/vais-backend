@@ -1,15 +1,15 @@
-"""HACS Backup Test Suite."""
+"""VAIS Backup Test Suite."""
 # pylint: disable=missing-docstring
 import os
 
-from custom_components.hacs.utils.backup import Backup, BackupNetDaemon
+from custom_components.vais.utils.backup import Backup, BackupNetDaemon
 
 
-def test_file(hacs, tmpdir):
+def test_file(vais, tmpdir):
     with open(f"{tmpdir.dirname}/dummy_file", "w") as dummy:
         dummy.write("")
 
-    backup = Backup(hacs=hacs, local_path=f"{tmpdir.dirname}/dummy_file")
+    backup = Backup(vais=vais, local_path=f"{tmpdir.dirname}/dummy_file")
     backup.create()
 
     assert not os.path.exists(backup.local_path)
@@ -22,10 +22,10 @@ def test_file(hacs, tmpdir):
     assert not os.path.exists(backup.backup_path_full)
 
 
-def test_directory(hacs, tmpdir):
+def test_directory(vais, tmpdir):
     os.makedirs(f"{tmpdir.dirname}/dummy_directory", exist_ok=True)
 
-    backup = Backup(hacs=hacs, local_path=f"{tmpdir.dirname}/dummy_directory")
+    backup = Backup(vais=vais, local_path=f"{tmpdir.dirname}/dummy_directory")
     backup.create()
 
     assert not os.path.exists(backup.local_path)
@@ -38,17 +38,17 @@ def test_directory(hacs, tmpdir):
     assert not os.path.exists(backup.backup_path_full)
 
 
-def test_muilti(hacs, tmpdir):
-    backup = Backup(hacs=hacs, local_path=f"{tmpdir.dirname}/dummy_directory")
+def test_muilti(vais, tmpdir):
+    backup = Backup(vais=vais, local_path=f"{tmpdir.dirname}/dummy_directory")
     backup.create()
     backup.create()
 
 
-def test_netdaemon_backup(hacs, repository_netdaemon):
+def test_netdaemon_backup(vais, repository_netdaemon):
     repository = repository_netdaemon
     repository.content.path.local = repository.localpath
     os.makedirs(repository.content.path.local, exist_ok=True)
-    backup = BackupNetDaemon(hacs=hacs, repository=repository)
+    backup = BackupNetDaemon(vais=vais, repository=repository)
     backup.cleanup()
     with open(f"{repository.content.path.local}/dummy_file.yaml", "w") as dummy:
         dummy.write("test: test")

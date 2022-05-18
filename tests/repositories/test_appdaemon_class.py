@@ -1,6 +1,6 @@
 import pytest
 
-from custom_components.hacs.exceptions import HacsException
+from custom_components.vais.exceptions import VaisException
 
 
 @pytest.mark.asyncio
@@ -11,7 +11,7 @@ async def test_base(repository_appdaemon):
 
 @pytest.mark.asyncio
 async def test_validate_repository(repository_appdaemon):
-    with pytest.raises(HacsException):
+    with pytest.raises(VaisException):
         await repository_appdaemon.validate_repository()
 
 

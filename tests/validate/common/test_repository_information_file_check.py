@@ -1,7 +1,7 @@
 from aiogithubapi.objects.repository.content import AIOGitHubAPIRepositoryTreeContent
 import pytest
 
-from custom_components.hacs.validate.repository_information_file import Validator
+from custom_components.vais.validate.repository_information_file import Validator
 
 
 @pytest.mark.asyncio
@@ -21,7 +21,8 @@ async def test_no_readme_file(repository):
 @pytest.mark.asyncio
 async def test_has_info_file(repository):
     repository.tree = [
-        AIOGitHubAPIRepositoryTreeContent({"path": "info", "type": "file"}, "test/test", "main")
+        AIOGitHubAPIRepositoryTreeContent(
+            {"path": "info", "type": "file"}, "test/test", "main")
     ]
     check = Validator(repository)
     await check.execute_validation()
@@ -31,7 +32,8 @@ async def test_has_info_file(repository):
 @pytest.mark.asyncio
 async def test_has_info_md_file(repository):
     repository.tree = [
-        AIOGitHubAPIRepositoryTreeContent({"path": "info.md", "type": "file"}, "test/test", "main")
+        AIOGitHubAPIRepositoryTreeContent(
+            {"path": "info.md", "type": "file"}, "test/test", "main")
     ]
     check = Validator(repository)
     await check.execute_validation()
@@ -42,7 +44,8 @@ async def test_has_info_md_file(repository):
 async def test_has_readme_file(repository):
     repository.repository_manifest.render_readme = True
     repository.tree = [
-        AIOGitHubAPIRepositoryTreeContent({"path": "readme", "type": "file"}, "test/test", "main")
+        AIOGitHubAPIRepositoryTreeContent(
+            {"path": "readme", "type": "file"}, "test/test", "main")
     ]
     check = Validator(repository)
     await check.execute_validation()

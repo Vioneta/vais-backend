@@ -7,21 +7,22 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 import pytest
 
-from custom_components.hacs.base import HacsBase
-from custom_components.hacs.diagnostics import async_get_config_entry_diagnostics
+from custom_components.vais.base import VaisBase
+from custom_components.vais.diagnostics import async_get_config_entry_diagnostics
 
 from tests.common import TOKEN
 
 
 @pytest.mark.asyncio
-async def test_diagnostics(hacs: HacsBase, hass: HomeAssistant, config_entry: ConfigEntry):
+async def test_diagnostics(vais: VaisBase, hass: HomeAssistant, config_entry: ConfigEntry):
     """Test the base result."""
     response = GitHubResponseModel(MagicMock(headers={}))
-    response.data = GitHubRateLimitModel({"resources": {"core": {"remaining": 0}}})
+    response.data = GitHubRateLimitModel(
+        {"resources": {"core": {"remaining": 0}}})
     with patch("aiogithubapi.github.GitHub.rate_limit", return_value=response):
         diagnostics = await async_get_config_entry_diagnostics(hass, config_entry)
 
-    assert diagnostics["hacs"]["version"] == "0.0.0"
+    assert diagnostics["vais"]["version"] == "0.0.0"
     assert diagnostics["rate_limit"]["resources"]["core"]["remaining"] == 0
     assert TOKEN not in str(diagnostics)
     assert diagnostics["entry"]["data"]["token"] == REDACTED
@@ -29,7 +30,7 @@ async def test_diagnostics(hacs: HacsBase, hass: HomeAssistant, config_entry: Co
 
 @pytest.mark.asyncio
 async def test_diagnostics_with_exception(
-    hacs: HacsBase, hass: HomeAssistant, config_entry: ConfigEntry
+    vais: VaisBase, hass: HomeAssistant, config_entry: ConfigEntry
 ):
     """test the result with issues getting the ratelimit."""
     with patch(
@@ -37,5 +38,5 @@ async def test_diagnostics_with_exception(
     ):
         diagnostics = await async_get_config_entry_diagnostics(hass, config_entry)
 
-    assert diagnostics["hacs"]["version"] == "0.0.0"
+    assert diagnostics["vais"]["version"] == "0.0.0"
     assert diagnostics["rate_limit"] == "Something went wrong"

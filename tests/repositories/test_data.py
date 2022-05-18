@@ -1,5 +1,5 @@
-"""HACS Repository Data Test Suite."""
-from custom_components.hacs.repositories.base import RepositoryData
+"""VAIS Repository Data Test Suite."""
+from custom_components.vais.repositories.base import RepositoryData
 
 # pylint: disable=missing-docstring
 from tests.sample_data import repository_data

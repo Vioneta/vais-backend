@@ -1,24 +1,24 @@
-"""HACS Sensor Test Suite."""
+"""VAIS Sensor Test Suite."""
 # pylint: disable=missing-docstring
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceEntryType
 import pytest
 
-from custom_components.hacs.base import HacsBase
-from custom_components.hacs.enums import HacsDispatchEvent
-from custom_components.hacs.repositories import HacsIntegrationRepository
-from custom_components.hacs.sensor import (
-    HACSSensor,
+from custom_components.vais.base import VaisBase
+from custom_components.vais.enums import VaisDispatchEvent
+from custom_components.vais.repositories import VaisIntegrationRepository
+from custom_components.vais.sensor import (
+    VAISSensor,
     async_setup_entry,
     async_setup_platform,
 )
 
 
-async def sensor_setup(hacs: HacsBase, hass: HomeAssistant) -> HACSSensor:
+async def sensor_setup(vais: VaisBase, hass: HomeAssistant) -> VAISSensor:
     """Set up the sensor."""
-    sensor = HACSSensor(hacs)
+    sensor = VAISSensor(vais)
     sensor.hass = hass
-    sensor.entity_id = "sensor.hacs"
+    sensor.entity_id = "sensor.vais"
 
     await sensor.async_added_to_hass()
     return sensor
@@ -26,31 +26,31 @@ async def sensor_setup(hacs: HacsBase, hass: HomeAssistant) -> HACSSensor:
 
 def mock_setup(entities):
     for entity in entities:
-        assert entity.name == "hacs"
+        assert entity.name == "vais"
 
 
 @pytest.mark.asyncio
-async def test_sensor_data(hacs: HacsBase, hass: HomeAssistant):
-    sensor = await sensor_setup(hacs, hass)
-    assert sensor.name == "hacs"
-    assert sensor.icon == "hacs:hacs"
+async def test_sensor_data(vais: VaisBase, hass: HomeAssistant):
+    sensor = await sensor_setup(vais, hass)
+    assert sensor.name == "vais"
+    assert sensor.icon == "vais:vais"
     assert sensor.unique_id.startswith("0717a0cd")
     assert sensor.unit_of_measurement == "pending update(s)"
 
 
 @pytest.mark.asyncio
-async def test_device_info_entry_type(hacs: HacsBase, hass: HomeAssistant):
-    sensor = await sensor_setup(hacs, hass)
+async def test_device_info_entry_type(vais: VaisBase, hass: HomeAssistant):
+    sensor = await sensor_setup(vais, hass)
     entry_type = sensor.device_info["entry_type"]
     assert entry_type == DeviceEntryType.SERVICE
     assert isinstance(entry_type, DeviceEntryType)
 
 
 @pytest.mark.asyncio
-async def test_sensor_update_event(hacs: HacsBase, hass: HomeAssistant):
-    sensor = await sensor_setup(hacs, hass)
+async def test_sensor_update_event(vais: VaisBase, hass: HomeAssistant):
+    sensor = await sensor_setup(vais, hass)
 
-    repository = HacsIntegrationRepository(hacs, "test/one")
+    repository = VaisIntegrationRepository(vais, "test/one")
     repository.data.update_data(
         {
             "id": "123",
@@ -59,9 +59,9 @@ async def test_sensor_update_event(hacs: HacsBase, hass: HomeAssistant):
             "last_version": "2",
         }
     )
-    hacs.repositories.register(repository)
+    vais.repositories.register(repository)
 
-    repository = HacsIntegrationRepository(hacs, "test/two")
+    repository = VaisIntegrationRepository(vais, "test/two")
     repository.data.update_data(
         {
             "id": "321",
@@ -70,22 +70,22 @@ async def test_sensor_update_event(hacs: HacsBase, hass: HomeAssistant):
             "last_version": "1",
         }
     )
-    hacs.repositories.register(repository)
+    vais.repositories.register(repository)
 
-    hacs.common.categories = {"integration"}
+    vais.common.categories = {"integration"}
     assert sensor.state is None
 
-    hacs.async_dispatch(HacsDispatchEvent.REPOSITORY, {})
+    vais.async_dispatch(VaisDispatchEvent.REPOSITORY, {})
 
     await hass.async_block_till_done()
     assert sensor.state == 1
 
 
 @pytest.mark.asyncio
-async def test_sensor_update_manual(hacs: HacsBase, hass: HomeAssistant):
-    sensor = await sensor_setup(hacs, hass)
+async def test_sensor_update_manual(vais: VaisBase, hass: HomeAssistant):
+    sensor = await sensor_setup(vais, hass)
 
-    repository = HacsIntegrationRepository(hacs, "test/one")
+    repository = VaisIntegrationRepository(vais, "test/one")
     repository.data.update_data(
         {
             "id": "123",
@@ -94,9 +94,9 @@ async def test_sensor_update_manual(hacs: HacsBase, hass: HomeAssistant):
             "last_version": "2",
         }
     )
-    hacs.repositories.register(repository)
+    vais.repositories.register(repository)
 
-    repository = HacsIntegrationRepository(hacs, "test/two")
+    repository = VaisIntegrationRepository(vais, "test/two")
     repository.data.update_data(
         {
             "id": "321",
@@ -105,9 +105,9 @@ async def test_sensor_update_manual(hacs: HacsBase, hass: HomeAssistant):
             "last_version": "1",
         }
     )
-    hacs.repositories.register(repository)
+    vais.repositories.register(repository)
 
-    hacs.common.categories = {"integration"}
+    vais.common.categories = {"integration"}
     assert sensor.state is None
 
     await sensor.async_update()
@@ -115,10 +115,10 @@ async def test_sensor_update_manual(hacs: HacsBase, hass: HomeAssistant):
 
 
 @pytest.mark.asyncio
-async def test_setup_platform(hass: HomeAssistant, hacs: HacsBase):
+async def test_setup_platform(hass: HomeAssistant, vais: VaisBase):
     await async_setup_platform(hass, {}, mock_setup)
 
 
 @pytest.mark.asyncio
-async def test_setup_entry(hass: HomeAssistant, hacs: HacsBase):
+async def test_setup_entry(hass: HomeAssistant, vais: VaisBase):
     await async_setup_entry(hass, {}, mock_setup)

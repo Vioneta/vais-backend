@@ -5,11 +5,11 @@ import json
 from aresponses import ResponsesMockServer
 import pytest
 
-from custom_components.hacs.base import HacsBase
-from custom_components.hacs.enums import HacsCategory
-from custom_components.hacs.exceptions import (
+from custom_components.vais.base import VaisBase
+from custom_components.vais.enums import VaisCategory
+from custom_components.vais.exceptions import (
     AddonRepositoryException,
-    HacsException,
+    VaisException,
     HomeAssistantCoreRepositoryException,
 )
 
@@ -26,16 +26,16 @@ from tests.sample_data import (
 @pytest.mark.parametrize(
     "category",
     (
-        HacsCategory.INTEGRATION,
-        HacsCategory.NETDAEMON,
-        HacsCategory.PLUGIN,
-        HacsCategory.PYTHON_SCRIPT,
-        HacsCategory.THEME,
+        VaisCategory.INTEGRATION,
+        VaisCategory.NETDAEMON,
+        VaisCategory.PLUGIN,
+        VaisCategory.PYTHON_SCRIPT,
+        VaisCategory.THEME,
     ),
 )
 async def test_registration(
-    hacs: HacsBase,
-    category: HacsCategory,
+    vais: VaisBase,
+    category: VaisCategory,
     aresponses: ResponsesMockServer,
 ) -> None:
     """Test repository registration."""
@@ -43,14 +43,16 @@ async def test_registration(
         "api.github.com",
         "/repos/test/test",
         "get",
-        aresponses.Response(body=json.dumps(repository_data), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(repository_data),
+                            headers=response_rate_limit_header),
     )
 
     aresponses.add(
         "api.github.com",
         "/repos/test/test/releases",
         "get",
-        aresponses.Response(body=json.dumps(release_data), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(release_data),
+                            headers=response_rate_limit_header),
     )
 
     aresponses.add(
@@ -63,7 +65,8 @@ async def test_registration(
         ),
     )
 
-    content = base64.b64encode(json.dumps(integration_manifest).encode("utf-8"))
+    content = base64.b64encode(json.dumps(
+        integration_manifest).encode("utf-8"))
     aresponses.add(
         "api.github.com",
         "/repos/test/test/contents/custom_components/test/manifest.json",
@@ -74,11 +77,11 @@ async def test_registration(
         ),
     )
 
-    assert hacs.repositories.get_by_full_name("test/test") is None
+    assert vais.repositories.get_by_full_name("test/test") is None
 
-    await hacs.async_register_repository("test/test", category, check=True)
+    await vais.async_register_repository("test/test", category, check=True)
 
-    repository = hacs.repositories.get_by_full_name("test/test")
+    repository = vais.repositories.get_by_full_name("test/test")
 
     assert repository is not None
     assert repository.data.category == category
@@ -93,11 +96,12 @@ async def test_registration(
         ("home-assistant/addons", AddonRepositoryException.exception_message),
         ("hassio-addons/some-addon", AddonRepositoryException.exception_message),
         ("some-user/addons", AddonRepositoryException.exception_message),
-        ("some-user/some-invalid-repo", "Repository structure for main is not compliant"),
+        ("some-user/some-invalid-repo",
+         "Repository structure for main is not compliant"),
     ),
 )
 async def test_registration_issues(
-    hacs: HacsBase,
+    vais: VaisBase,
     repository_full_name: str,
     expected_message: str,
     aresponses: ResponsesMockServer,
@@ -108,14 +112,16 @@ async def test_registration_issues(
         "api.github.com",
         f"/repos/{repository_full_name}",
         "get",
-        aresponses.Response(body=json.dumps(repo_data), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(repo_data),
+                            headers=response_rate_limit_header),
     )
 
     aresponses.add(
         "api.github.com",
         f"/repos/{repository_full_name}/releases",
         "get",
-        aresponses.Response(body=json.dumps([]), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(
+            []), headers=response_rate_limit_header),
     )
 
     aresponses.add(
@@ -146,9 +152,9 @@ async def test_registration_issues(
         ),
     )
 
-    assert hacs.repositories.get_by_full_name(repository_full_name) is None
-    with pytest.raises(HacsException, match=expected_message):
+    assert vais.repositories.get_by_full_name(repository_full_name) is None
+    with pytest.raises(VaisException, match=expected_message):
 
-        await hacs.async_register_repository(
-            repository_full_name, HacsCategory.INTEGRATION, check=True
+        await vais.async_register_repository(
+            repository_full_name, VaisCategory.INTEGRATION, check=True
         )

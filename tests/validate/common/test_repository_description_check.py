@@ -1,6 +1,6 @@
 import pytest
 
-from custom_components.hacs.validate.repository_description import Validator
+from custom_components.vais.validate.repository_description import Validator
 
 
 @pytest.mark.asyncio
@@ -12,7 +12,7 @@ async def test_repository_no_description(repository):
 
 
 @pytest.mark.asyncio
-async def test_repository_hacs_description(repository):
+async def test_repository_vais_description(repository):
     check = Validator(repository)
     await check.execute_validation()
     assert not check.failed

@@ -1,7 +1,7 @@
 """Sample datasets for testing."""
 # pylint: disable=invalid-name,missing-docstring
 
-from custom_components.hacs.enums import HacsCategory
+from custom_components.vais.enums import VaisCategory
 
 repository_data = {
     "id": 999999999,
@@ -34,7 +34,7 @@ tree_files_base = {
     "tree": [
         {"path": "info.md", "type": "blob"},
         {"path": "readme.md", "type": "blob"},
-        {"path": "hacs.json", "type": "blob"},
+        {"path": "vais.json", "type": "blob"},
     ]
 }
 
@@ -75,7 +75,7 @@ def repository_data_archived():
 
 def category_test_treefiles(category):
     base = tree_files_base
-    if category == HacsCategory.INTEGRATION:
+    if category == VaisCategory.INTEGRATION:
         return {
             "tree": [
                 *base["tree"],
@@ -88,7 +88,7 @@ def category_test_treefiles(category):
             ]
         }
 
-    if category == HacsCategory.THEME:
+    if category == VaisCategory.THEME:
         return {
             "tree": [
                 *base["tree"],
@@ -96,7 +96,7 @@ def category_test_treefiles(category):
             ]
         }
 
-    if category == HacsCategory.PLUGIN:
+    if category == VaisCategory.PLUGIN:
         return {
             "tree": [
                 *base["tree"],
@@ -104,7 +104,7 @@ def category_test_treefiles(category):
             ]
         }
 
-    if category == HacsCategory.PYTHON_SCRIPT:
+    if category == VaisCategory.PYTHON_SCRIPT:
         return {
             "tree": [
                 *base["tree"],
@@ -113,7 +113,7 @@ def category_test_treefiles(category):
             ]
         }
 
-    if category == HacsCategory.NETDAEMON:
+    if category == VaisCategory.NETDAEMON:
         return {
             "tree": [
                 *base["tree"],

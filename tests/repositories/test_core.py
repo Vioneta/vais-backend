@@ -2,11 +2,11 @@
 # pylint: disable=missing-docstring
 from awesomeversion import AwesomeVersion
 
-from custom_components.hacs.repositories.base import HacsRepository
+from custom_components.vais.repositories.base import VaisRepository
 
 
-def test_hacs_repository_core_mostly_defaults(hacs):
-    repository = HacsRepository(hacs)
+def test_vais_repository_core_mostly_defaults(vais):
+    repository = VaisRepository(vais)
 
     repository.data.full_name = "developer/repository"
     repository.data.full_name_lower = "developer/repository"
@@ -24,9 +24,9 @@ def test_hacs_repository_core_mostly_defaults(hacs):
     assert not repository.pending_update
 
 
-def test_hacs_repository_core_can_install_legacy(hacs):
-    repository = HacsRepository(hacs)
-    repository.hacs.core.ha_version = AwesomeVersion("1.0.0")
+def test_vais_repository_core_can_install_legacy(vais):
+    repository = VaisRepository(vais)
+    repository.vais.core.ha_version = AwesomeVersion("1.0.0")
     repository.data.releases = True
 
     repository.repository_manifest.homeassistant = "1.1.0"
@@ -39,9 +39,9 @@ def test_hacs_repository_core_can_install_legacy(hacs):
     assert repository.can_download
 
 
-def test_hacs_repository_core_can_install_manifest(hacs):
-    repository = HacsRepository(hacs)
-    repository.hacs.core.ha_version = AwesomeVersion("1.0.0")
+def test_vais_repository_core_can_install_manifest(vais):
+    repository = VaisRepository(vais)
+    repository.vais.core.ha_version = AwesomeVersion("1.0.0")
     repository.data.releases = True
 
     repository.repository_manifest.homeassistant = "1.1.0"

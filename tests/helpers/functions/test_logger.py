@@ -1,9 +1,9 @@
 # pylint: disable=missing-module-docstring, missing-function-docstring
 from logging import Logger
 
-from custom_components.hacs.utils.logger import get_hacs_logger
+from custom_components.vais.utils.logger import get_vais_logger
 
 
 def test_logger():
-    hacs_logger = get_hacs_logger()
-    assert isinstance(hacs_logger, Logger)
+    vais_logger = get_vais_logger()
+    assert isinstance(vais_logger, Logger)

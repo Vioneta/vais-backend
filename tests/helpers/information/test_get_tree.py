@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from custom_components.hacs.exceptions import HacsException
+from custom_components.vais.exceptions import VaisException
 
 from tests.sample_data import (
     repository_data,
@@ -20,25 +20,29 @@ async def test_get_tree(aresponses, repository_integration):
         "api.github.com",
         "/rate_limit",
         "get",
-        aresponses.Response(body=b"{}", headers=response_rate_limit_header, status=200),
+        aresponses.Response(
+            body=b"{}", headers=response_rate_limit_header, status=200),
     )
     aresponses.add(
         "api.github.com",
         "/repos/test/test",
         "get",
-        aresponses.Response(body=json.dumps(repository_data), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(repository_data),
+                            headers=response_rate_limit_header),
     )
     aresponses.add(
         "api.github.com",
         "/rate_limit",
         "get",
-        aresponses.Response(body=b"{}", headers=response_rate_limit_header, status=200),
+        aresponses.Response(
+            body=b"{}", headers=response_rate_limit_header, status=200),
     )
     aresponses.add(
         "api.github.com",
         "/repos/test/test/git/trees/main",
         "get",
-        aresponses.Response(body=json.dumps(tree_files_base), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(tree_files_base),
+                            headers=response_rate_limit_header),
     )
 
     (
@@ -48,7 +52,7 @@ async def test_get_tree(aresponses, repository_integration):
     tree = await repository_integration.get_tree(
         repository_integration.repository_object.default_branch
     )
-    assert "hacs.json" in [x.full_path for x in tree]
+    assert "vais.json" in [x.full_path for x in tree]
 
 
 @pytest.mark.asyncio
@@ -57,19 +61,22 @@ async def test_get_tree_exception(aresponses, repository_integration):
         "api.github.com",
         "/rate_limit",
         "get",
-        aresponses.Response(body=b"{}", headers=response_rate_limit_header, status=200),
+        aresponses.Response(
+            body=b"{}", headers=response_rate_limit_header, status=200),
     )
     aresponses.add(
         "api.github.com",
         "/repos/test/test",
         "get",
-        aresponses.Response(body=json.dumps(repository_data), headers=response_rate_limit_header),
+        aresponses.Response(body=json.dumps(repository_data),
+                            headers=response_rate_limit_header),
     )
     aresponses.add(
         "api.github.com",
         "/rate_limit",
         "get",
-        aresponses.Response(body=b"{}", headers=response_rate_limit_header_with_limit, status=403),
+        aresponses.Response(
+            body=b"{}", headers=response_rate_limit_header_with_limit, status=403),
     )
     aresponses.add(
         "api.github.com",
@@ -85,7 +92,7 @@ async def test_get_tree_exception(aresponses, repository_integration):
         repository_integration.repository_object,
         _,
     ) = await repository_integration.async_get_legacy_repository_object()
-    with pytest.raises(HacsException):
+    with pytest.raises(VaisException):
         await repository_integration.get_tree(
             repository_integration.repository_object.default_branch
         )

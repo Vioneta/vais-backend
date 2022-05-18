@@ -1,4 +1,4 @@
-from custom_components.hacs.utils import version
+from custom_components.vais.utils import version
 
 
 def test_version_to_download(repository):
