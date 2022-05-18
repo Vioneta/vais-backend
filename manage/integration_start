@@ -26,7 +26,7 @@ fi
 rm -rf "${PWD}/config/custom_components"
 ln -sf "${PWD}/custom_components" "${PWD}/config/custom_components"
 
-echo "Installing VAI frontend"
+echo "Installing VAIS frontend"
 bash "${PWD}/manage/install_frontend"
 
 # Start Home Assistant

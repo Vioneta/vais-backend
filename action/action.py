@@ -86,7 +86,7 @@ async def preflight():
     if REPOSITORY and CATEGORY:
         repository = REPOSITORY
         category = CATEGORY
-    elif GITHUB_REPOSITORY == "vais/default":
+    elif GITHUB_REPOSITORY == "Vioneta/default":
         category = chose_category()
         repository = chose_repository(category)
         logger.info(f"Actor: {GITHUB_ACTOR}")
@@ -114,7 +114,7 @@ async def preflight():
     async with aiohttp.ClientSession() as session:
         github = GitHub(TOKEN, session, headers=VAIS_ACTION_GITHUB_API_HEADERS)
         repo = await github.get_repo(repository)
-        if ref is None and GITHUB_REPOSITORY != "vais/default":
+        if ref is None and GITHUB_REPOSITORY != "Vioneta/default":
             ref = repo.default_branch
 
     await validate_repository(repository, category, ref)
