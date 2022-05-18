@@ -1,11 +1,9 @@
 {
-  "name": "HACS Integration Development",
+  "name": "VAIS Integration Development",
   "image": "ghcr.io/ludeeus/devcontainer/integration:latest",
   "postCreateCommand": "make init",
   "context": "..",
-  "appPort": [
-    "9123:8123"
-  ],
+  "appPort": ["9123:8123"],
   "extensions": [
     "ms-python.python",
     "github.vscode-pull-request-github",
@@ -25,10 +23,7 @@
     "python.analysis.autoSearchPaths": false,
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.linting.pylintArgs": [
-      "--disable",
-      "import-error"
-    ],
+    "python.linting.pylintArgs": ["--disable", "import-error"],
     "python.formatting.provider": "black",
     "editor.formatOnPaste": false,
     "editor.formatOnSave": true,
