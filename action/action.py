@@ -1,4 +1,4 @@
-"""Validate a GitHub repository to be used with HACS."""
+"""Validate a GitHub repository to be used with VAIS."""
 import asyncio
 import json
 import logging
@@ -8,10 +8,10 @@ from aiogithubapi import GitHub, GitHubAPI
 import aiohttp
 from homeassistant.core import HomeAssistant
 
-from custom_components.vais.base import HacsBase
-from custom_components.vais.const import HACS_ACTION_GITHUB_API_HEADERS
-from custom_components.vais.exceptions import HacsException
-from custom_components.vais.utils.logger import get_hacs_logger
+from custom_components.vais.base import VaisBase
+from custom_components.vais.const import VAIS_ACTION_GITHUB_API_HEADERS
+from custom_components.vais.exceptions import VaisException
+from custom_components.vais.utils.logger import get_vais_logger
 from custom_components.vais.validate.manager import ValidationManager
 
 TOKEN = os.getenv("INPUT_GITHUB_TOKEN")
@@ -40,7 +40,7 @@ logging.basicConfig(
     format="::%(levelname)s:: %(message)s",
     level=logging.DEBUG,
 )
-logger = get_hacs_logger()
+logger = get_vais_logger()
 
 
 def error(error: str):
@@ -86,7 +86,7 @@ async def preflight():
     if REPOSITORY and CATEGORY:
         repository = REPOSITORY
         category = CATEGORY
-    elif GITHUB_REPOSITORY == "hacs/default":
+    elif GITHUB_REPOSITORY == "vais/default":
         category = chose_category()
         repository = chose_repository(category)
         logger.info(f"Actor: {GITHUB_ACTOR}")
@@ -112,9 +112,9 @@ async def preflight():
         error("No category found, use env CATEGORY to set this.")
 
     async with aiohttp.ClientSession() as session:
-        github = GitHub(TOKEN, session, headers=HACS_ACTION_GITHUB_API_HEADERS)
+        github = GitHub(TOKEN, session, headers=VAIS_ACTION_GITHUB_API_HEADERS)
         repo = await github.get_repo(repository)
-        if ref is None and GITHUB_REPOSITORY != "hacs/default":
+        if ref is None and GITHUB_REPOSITORY != "vais/default":
             ref = repo.default_branch
 
     await validate_repository(repository, category, ref)
@@ -123,30 +123,30 @@ async def preflight():
 async def validate_repository(repository, category, ref=None):
     """Validate."""
     async with aiohttp.ClientSession() as session:
-        hacs = HacsBase()
-        hacs.hass = HomeAssistant()
-        hacs.session = session
-        hacs.configuration.token = TOKEN
-        hacs.core.config_path = None
-        hacs.validation = ValidationManager(hacs=hacs, hass=hacs.hass)
+        vais = VaisBase()
+        vais.hass = HomeAssistant()
+        vais.session = session
+        vais.configuration.token = TOKEN
+        vais.core.config_path = None
+        vais.validation = ValidationManager(vais=vais, hass=vais.hass)
         # Legacy GitHub client
-        hacs.github = GitHub(
-            hacs.configuration.token,
+        vais.github = GitHub(
+            vais.configuration.token,
             session,
-            headers=HACS_ACTION_GITHUB_API_HEADERS,
+            headers=VAIS_ACTION_GITHUB_API_HEADERS,
         )
 
         # New GitHub client
-        hacs.githubapi = GitHubAPI(
-            token=hacs.configuration.token,
+        vais.githubapi = GitHubAPI(
+            token=vais.configuration.token,
             session=session,
-            **{"client_name": "HACS/Action"},
+            **{"client_name": "VAIS/Action"},
         )
         try:
-            await hacs.async_register_repository(
+            await vais.async_register_repository(
                 repository_full_name=repository, category=category, ref=ref
             )
-        except HacsException as exception:
+        except VaisException as exception:
             error(exception)
 
 

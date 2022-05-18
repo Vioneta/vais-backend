@@ -1,13 +1,13 @@
 FROM ghcr.io/ludeeus/devcontainer/python:3.9
 
-WORKDIR /hacs
+WORKDIR /vais
 
-RUN git clone --quiet --depth 1 https://github.com/hacs/integration.git /hacs
-RUN git clone --quiet --depth 1 https://github.com/hacs/default.git /default
+RUN git clone --quiet --depth 1 https://github.com/vais/integration.git /vais
+RUN git clone --quiet --depth 1 https://github.com/vais/default.git /default
 
 RUN python3 -m pip install homeassistant aiogithubapi > /dev/null
-RUN bash /hacs/manage/install_frontend > /dev/null
+RUN bash /vais/manage/install_frontend > /dev/null
 
-COPY ./action.py /hacs/action.py
+COPY ./action.py /vais/action.py
 
-ENTRYPOINT ["python3", "/hacs/action.py"]
+ENTRYPOINT ["python3", "/vais/action.py"]

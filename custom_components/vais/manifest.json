@@ -1,5 +1,5 @@
 {
-  "codeowners": ["@ludeeus"],
+  "codeowners": ["@vioneta"],
   "config_flow": true,
   "dependencies": [
     "http",
@@ -8,10 +8,10 @@
     "persistent_notification",
     "lovelace"
   ],
-  "documentation": "https://vais.xyz/docs/configuration/start",
+  "documentation": "https://vais.vioneta.io/docs/configuration/start",
   "domain": "vais",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/vais/integration/issues",
+  "issue_tracker": "https://github.com/Vioneta/integrations/issues",
   "name": "VAIS",
   "requirements": ["aiogithubapi>=22.2.4"],
   "version": "0.0.0"

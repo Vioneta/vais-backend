@@ -1,15 +1,15 @@
-name: "HACS"
-description: "GitHub action for HACS."
+name: "VAIS"
+description: "GitHub action for VAIS."
 inputs:
   github_token:
-    description: 'Your personal GitHub Access token'
+    description: "Your personal GitHub Access token"
     required: true
   category:
-    description: 'The category of the repository'
+    description: "The category of the repository"
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
 branding:
-  icon: 'terminal'
-  color: 'gray-dark'
+  icon: "terminal"
+  color: "gray-dark"
