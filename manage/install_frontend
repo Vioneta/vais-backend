@@ -2,7 +2,7 @@
 
 set -e
 
-FRONTEND_VERSION="20220514073057"
+FRONTEND_VERSION="20220519051104"
 
 python3 -m pip install -U --target=./custom_components/vais "vais_frontend==$FRONTEND_VERSION"
 rm -rf ./custom_components/vais/*.dist-info
