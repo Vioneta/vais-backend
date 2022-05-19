@@ -6,7 +6,7 @@ from aiogithubapi.common.const import ACCEPT_HEADERS
 NAME_SHORT = "VAIS"
 DOMAIN = "vais"
 CLIENT_ID = "395a8e669c5de9f7c6e8"
-MINIMUM_HA_VERSION = "0.0.0"
+MINIMUM_HA_VERSION = "2022.3.0"
 
 TV = TypeVar("TV")
 

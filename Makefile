@@ -57,6 +57,6 @@ vioneta-agro-install-old: ## Install the oldest version of Home Assistant
 	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
 	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
 	python3 -m pip --disable-pip-version-check \
-		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@2022.5.0;
+		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@2022.4.6;
 
 vioneta-agro-update: vioneta-install ## Alias for 'vioneta-agro-install'
