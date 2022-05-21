@@ -59,9 +59,9 @@ class VaisRepositoryUpdateEntity(VaisRepositoryEntity, UpdateEntity):
     def release_summary(self) -> str | None:
         """Return the release summary."""
         if not self.repository.can_download:
-            return f"<ha-alert alert-type='warning'>Requires Home Assistant {self.repository.repository_manifest.homeassistant}</ha-alert>"
+            return f"<ha-alert alert-type='warning'>Requires Vioneta Agro {self.repository.repository_manifest.homeassistant}</ha-alert>"
         if self.repository.pending_restart:
-            return "<ha-alert alert-type='error'>Restart of Home Assistant required</ha-alert>"
+            return "<ha-alert alert-type='error'>Restart of Vioneta Agro required</ha-alert>"
         return None
 
     @property
@@ -73,8 +73,8 @@ class VaisRepositoryUpdateEntity(VaisRepositoryEntity, UpdateEntity):
         ):
             return None
 
-        return f"https://brands.home-assistant.io/_/{self.repository.data.domain}/icon.png"
-
+        return f"http://localhost:8123/statics/integrations/vais/icon.png"
+#https://localhost:8123/statics/integrations/vais/icon.png
     async def async_install(self, version: str | None, backup: bool, **kwargs: Any) -> None:
         """Install an update."""
         if self.repository.display_version_or_commit == "version":
@@ -99,7 +99,7 @@ class VaisRepositoryUpdateEntity(VaisRepositoryEntity, UpdateEntity):
             if self.repository.data.category == VaisCategory.INTEGRATION:
                 release_notes += (
                     "\n\n<ha-alert alert-type='warning'>You need to restart"
-                    " Home Assistant manually after updating.</ha-alert>\n\n"
+                    " Vioneta Agro manually after updating.</ha-alert>\n\n"
                 )
             if self.repository.data.category == VaisCategory.PLUGIN:
                 release_notes += (
