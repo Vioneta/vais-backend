@@ -1,1 +1,1 @@
-{"buildTargets":["bump-frontend","clear-storage","coverage","help","init","lint","make","requirements","start","test","update","update-base-repositories","vioneta-agro-install","vioneta-agro-install-old","vioneta-agro-update"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
+{"buildTargets":[],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
