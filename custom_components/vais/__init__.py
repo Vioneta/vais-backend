@@ -143,16 +143,16 @@ async def async_initialize_integration(
                 vais.disable_vais(VaisDisabledReason.CONSTRAINS)
                 return False
 
-        # if not version_left_higher_or_equal_then_right(
-        #     vais.core.ha_version.string,
-        #     MINIMUM_HA_VERSION,
-        # ):
-        #     vais.log.critical(
-        #         "You need HA version %s or newer to use this integration.",
-        #         MINIMUM_HA_VERSION,
-        #     )
-        #     vais.disable_vais(VaisDisabledReason.CONSTRAINS)
-        #     return False
+        if not version_left_higher_or_equal_then_right(
+            vais.core.ha_version.string,
+            MINIMUM_HA_VERSION,
+        ):
+            vais.log.critical(
+                "You need HA version %s or newer to use this integration.",
+                MINIMUM_HA_VERSION,
+            )
+            vais.disable_vais(VaisDisabledReason.CONSTRAINS)
+            return False
 
         if not await vais.data.restore():
             vais.disable_vais(VaisDisabledReason.RESTORE)
