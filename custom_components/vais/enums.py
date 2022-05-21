@@ -6,8 +6,8 @@ from enum import Enum
 class VaisGitHubRepo(str, Enum):
     """VaisGitHubRepo."""
 
-    DEFAULT = "vais/default"
-    INTEGRATION = "vais/integration"
+    DEFAULT = "Vioneta/default"
+    INTEGRATION = "Vioneta/vais-backend"
 
 
 class VaisCategory(str, Enum):

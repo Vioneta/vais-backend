@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 18 15:22:32 2022
+# Make data base, printed on Sat May 21 13:46:31 2022
 
 # Variables
 
@@ -23,7 +23,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1a4a8cb5-c01e-4be6-812f-c3aeded46aeb.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-150da8b8-0eec-42f7-b525-476b915aea96.sock
 # environment
 MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
 # environment
@@ -111,7 +111,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 5260
+VSCODE_PID = 7418
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -119,7 +119,7 @@ XDG_SESSION_TYPE = x11
 # environment
 _WSREP_START_POSITION = 
 # environment
-SESSION_MANAGER = local/Tiron:@/tmp/.ICE-unix/4504,unix/Tiron:/tmp/.ICE-unix/4504
+SESSION_MANAGER = local/Tiron:@/tmp/.ICE-unix/5307,unix/Tiron:/tmp/.ICE-unix/5307
 # automatic
 *F = $(notdir $*)
 # environment
@@ -165,7 +165,7 @@ LC_MONETARY = si_LK
 # environment
 LC_TIME = si_LK
 # environment
-INVOCATION_ID = 449acf23c27b4e1090355077b0f26e45
+INVOCATION_ID = 709b68dca0644b59826c0cc06967034f
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -195,7 +195,7 @@ PLATFORMIO_PATH = /home/charith/.platformio/python3/bin:/home/charith/.local/bin
 # makefile (from 'Makefile', line 1)
 .DEFAULT_GOAL := help
 # environment
-SYSTEMD_EXEC_PID = 4531
+SYSTEMD_EXEC_PID = 5331
 # environment
 DISPLAY = :1
 # environment
@@ -207,11 +207,11 @@ DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 3876
+MANAGERPID = 4629
 # environment
 LC_MEASUREMENT = si_LK
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 5260
+GIO_LAUNCHED_DESKTOP_FILE_PID = 7418
 # environment
 _ = /usr/share/code/code
 # environment
@@ -223,7 +223,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 NVM_CD_FLAGS = 
 # environment
-JOURNAL_STREAM = 8:56452
+JOURNAL_STREAM = 8:61602
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -263,9 +263,9 @@ LC_IDENTIFICATION = si_LK
 
 # Directories
 
-# . (device 64768, inode 3902081): 25 files, no impossibilities.
+# . (device 64768, inode 3902081): 26 files, no impossibilities.
 
-# 25 files, no impossibilities in 1 directories.
+# 26 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -273,15 +273,14 @@ LC_IDENTIFICATION = si_LK
 
 # Files
 
+# Not a target:
 vioneta-install:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 51):
-	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
-	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
-	python3 -m pip --disable-pip-version-check \
-		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@dev;
 
 coverage:
 #  Implicit rule search has not been done.
@@ -303,10 +302,7 @@ update:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 38):
- 
-make: *** No rule to make target 'all'.  Stop.
-
-	git pull upstream main;
+	git pull ;
 
 lint:
 #  Implicit rule search has not been done.
@@ -321,20 +317,10 @@ lint:
 	bellybutton lint
 	vulture . --min-confidence 75 --ignore-names policy
 
-vioneta-install-old:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 57):
-	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
-	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
-	python3 -m pip --disable-pip-version-check \
-		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@2022.5.0;
-
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-18 13:10:02.286849529
+#  Last modified 2022-05-19 12:41:25.666126914
 #  File has been updated.
 #  Successfully updated.
 
@@ -349,18 +335,13 @@ requirements:
 	python3 -m pip --disable-pip-version-check install --ignore-installed -r requirements.txt
 	@bash manage/install_frontend
 
-vioneta-update: vioneta-install
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 clear-storage:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 47):
-	rm -rf config/.storage/hacs
-	rm config/.storage/hacs*
+	rm -rf config/.storage/vais
+	rm config/.storage/vais*
 
 update-base-repositories:
 #  Implicit rule search has not been done.
@@ -375,7 +356,7 @@ update-base-repositories:
 #  Modification time never checked.
 #  File has not been updated.
 
-init: requirements vioneta-install
+init: requirements vioneta-agro-install
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -412,20 +393,45 @@ bump-frontend:
 #  recipe to execute (from 'Makefile', line 41):
 	@bash manage/bump_frontend;
 
+vioneta-agro-install-old:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 57):
+	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
+	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
+	python3 -m pip --disable-pip-version-check \
+		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@2022.4.6;
+
+vioneta-agro-install:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 51):
+	python3 -m pip --disable-pip-version-check install -U "pip>=8.0.3,<20.3";
+	python3 -m pip --disable-pip-version-check install -U setuptools wheel;
+	python3 -m pip --disable-pip-version-check \
+		install --upgrade git+https://github.com/Vioneta/vioneta-core.git@dev;
+
+vioneta-agro-update: vioneta-install
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/33=0%
+# Load=19/1024=2%, Rehash=0, Collisions=0/34=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 44 / storage = 476 B / avg = 10 B
-# current buf: size = 8162 B / used = 476 B / count = 44 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 46 / storage = 512 B / avg = 11 B
+# current buf: size = 8162 B / used = 512 B / count = 46 / avg = 11 B
 
-# strcache performance: lookups = 65 / hit rate = 32%
+# strcache performance: lookups = 66 / hit rate = 30%
 # hash-table stats:
-# Load=44/8192=1%, Rehash=0, Collisions=0/65=0%
-# Finished Make data base on Wed May 18 15:22:32 2022
+# Load=46/8192=1%, Rehash=0, Collisions=0/66=0%
+# Finished Make data base on Sat May 21 13:46:31 2022
 
  
